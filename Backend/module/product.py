@@ -20,8 +20,11 @@ class Product(Resource):
         try:
             if args['uid'] and args['url']:
 
-                with urllib.request.urlopen(args['url']) as response:
-                    html = response.read()
+                try:
+                    with urllib.request.urlopen(args['url']) as response:
+                        html = response.read()
+                except:
+                    return jsonify({'message': 'Invalid URL', 'error': True, 'data': None})
 
                 soup = BeautifulSoup(html, 'lxml')
                 price_tag = soup.find_all(id="priceblock_ourprice")
@@ -39,7 +42,14 @@ class Product(Resource):
                         'url': args['url'],
                         'uid': args['uid'],
                         'initialPrice': price,
-                        'tile': title
+                        'currentPrice': price,
+                        'bestPrice': {
+                          'price': price,
+                          'date': dt.datetime.utcnow()
+                        },
+                        'tile': title,
+                        'needNotification': True,
+                        'hasNotifiedToday': False
                     })
                     return jsonify({'message': 'Product added successfully!', 'error': False, 'data': None})
                 else:
