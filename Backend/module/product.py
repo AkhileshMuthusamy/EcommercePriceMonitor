@@ -1,11 +1,8 @@
 from flask import jsonify
 from flask_restful import Resource, reqparse
-from bs4 import BeautifulSoup
-import urllib
-import urllib.request
-import re
 import datetime as dt
 from app import db
+import module.utils as utils
 
 parser = reqparse.RequestParser()
 
@@ -20,40 +17,27 @@ class Product(Resource):
         try:
             if args['uid'] and args['url']:
 
-                try:
-                    with urllib.request.urlopen(args['url']) as response:
-                        html = response.read()
-                except:
-                    return jsonify({'message': 'Invalid URL', 'error': True, 'data': None})
-
-                soup = BeautifulSoup(html, 'lxml')
-                price_tag = soup.find_all(id="priceblock_ourprice")
-                price_text = price_tag[0].get_text()
-                price_str = re.sub('([^0-9.])+', '', price_text)
-                price = float(price_str)
-
-                title_tag = soup.find_all('title')
-                title = title_tag[0].get_text()
-
-                if len(price_tag) > 0:
+                product = utils.scrap_product(args['url'])
+                print(product)
+                if product:
                     doc_ref = db.collection('products')
                     doc_ref.document().set({
                         'dateAdded': dt.datetime.utcnow(),
                         'url': args['url'],
                         'uid': args['uid'],
-                        'initialPrice': price,
-                        'currentPrice': price,
+                        'initialPrice': product[0],
+                        'currentPrice': product[0],
                         'bestPrice': {
-                          'price': price,
+                          'price': product[0],
                           'date': dt.datetime.utcnow()
                         },
-                        'tile': title,
+                        'tile': product[1],
                         'needNotification': True,
                         'hasNotifiedToday': False
                     })
                     return jsonify({'message': 'Product added successfully!', 'error': False, 'data': None})
                 else:
-                    return jsonify({'message': 'Unable to retrieve price', 'error': True, 'data': None})
+                    return jsonify({'message': 'Unable to retrieve product info', 'error': True, 'data': None})
             else:
                 return jsonify({'message': 'Field missing', 'error': True, 'data': None})
         except:
