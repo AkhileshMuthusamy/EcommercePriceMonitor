@@ -31,7 +31,7 @@ class Product(Resource):
                           'price': product[0],
                           'date': dt.datetime.utcnow()
                         },
-                        'tile': product[1],
+                        'title': product[1],
                         'needNotification': True,
                         'hasNotifiedToday': False
                     })
