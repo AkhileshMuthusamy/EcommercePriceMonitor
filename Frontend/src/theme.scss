@@ -1,0 +1,78 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$mci-primary: (
+    50 : #e3eff7,
+    100 : #b8d7ec,
+    200 : #89bddf,
+    300 : #59a3d2,
+    400 : #368fc8,
+    500 : #127bbe,
+    600 : #1073b8,
+    700 : #0d68af,
+    800 : #0a5ea7,
+    900 : #054b99,
+    A100 : #c5ddff,
+    A200 : #92bfff,
+    A400 : #5fa1ff,
+    A700 : #4692ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$mci-accent: (
+    50 : #f1f8e8,
+    100 : #dceec6,
+    200 : #c5e2a0,
+    300 : #aed67a,
+    400 : #9cce5e,
+    500 : #8bc541,
+    600 : #83bf3b,
+    700 : #78b832,
+    800 : #6eb02a,
+    900 : #5ba31c,
+    A100 : #ebffdb,
+    A200 : #ceffa8,
+    A400 : #b1ff75,
+    A700 : #a3ff5c,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #000000,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
+$my-app-primary: mat-palette($mci-primary);
+// $my-app-accent:  mat-palette($mat-pink, 500, 900, A100);
+$my-app-accent:  mat-palette($mci-accent, 500, 900, A100);
+$my-app-warn:    mat-palette($mat-deep-orange);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+@include angular-material-theme($my-app-theme);
+
