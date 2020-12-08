@@ -57,11 +57,11 @@ class UserLogin(Resource):
         else:
             return jsonify({'message': 'Email or password is invalid', 'error': True, 'data': None})
         # Retrieve all docs from firebase
-        # doc_ref = db.collection(u'users').stream()
+        # doc_ref = db.collection('users').stream()
         # for doc in doc_ref:
         #     print(doc.to_dict())
         # try:
-        #     doc_ref = db.collection(u'users').document(u'fPmMfgBmBP3OFl5XzrL')
+        #     doc_ref = db.collection('users').document(u'fPmMfgBmBP3OFl5XzrL')
         #     doc = doc_ref.get()
         #     print(doc.to_dict())
         # except google.cloud.exceptions.NotFound:

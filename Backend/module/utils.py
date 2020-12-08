@@ -29,6 +29,8 @@ def scrap_product(url):
 
     if website == 'AMAZON':
         price_tag = soup.find_all(id="priceblock_ourprice")
+        if price_tag.__len__()==0:
+            price_tag = soup.find_all(id="displayedPrice")
     elif website == 'FLIPKART':
         price_tag = soup.find_all("div", {"class": "_30jeq3 _16Jk6d"})
     price_text = price_tag[0].get_text()
