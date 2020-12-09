@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(AddProductComponent);
 
     dialogRef.afterClosed().subscribe((result: Array<any>) => {
-      console.log(`Dialog result:`, result);
+      this.loadProducts();
     });
   }
 
@@ -43,6 +43,16 @@ export class DashboardComponent implements OnInit {
 
   deleteProduct(pid: string) {
     this.productService.deleteUserProduct(pid).subscribe(res => {
+      if (!res.error) {
+        this.snackBar.open(res.message, 'Close', {duration: 2000});
+        this.loadProducts();
+      }
+      this.snackBar.open(res.message, 'Close', {duration: 2000});
+    });
+  }
+
+  updateNotification(pid: string, data) {
+    this.productService.updateUserProduct(pid, data).subscribe(res => {
       if (!res.error) {
         this.snackBar.open(res.message, 'Close', {duration: 2000});
         this.loadProducts();

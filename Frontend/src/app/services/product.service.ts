@@ -27,6 +27,10 @@ export class ProductService {
     return this.http.get<APIResponse<any>>(`${this.apiURL}product?uid=${this.authService.getUid()}`);
   }
 
+  updateUserProduct(pid, data): Observable<APIResponse<any>> {
+    return this.http.put<any>(`${this.apiURL}product?pid=${pid}`, {data});
+  }
+
   deleteUserProduct(pid: string): Observable<APIResponse<any>> {
     return this.http.delete<any>(`${this.apiURL}product?pid=${pid}`);
   }

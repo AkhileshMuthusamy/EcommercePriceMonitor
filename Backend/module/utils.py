@@ -28,6 +28,9 @@ def scrap_product(url):
     except:
         return None
 
+    if not html:
+        return None
+
     soup = BeautifulSoup(html, 'lxml')
     title = ''
     if website == 'AMAZON':
