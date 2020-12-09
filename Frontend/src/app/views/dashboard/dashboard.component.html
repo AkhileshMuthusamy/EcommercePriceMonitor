@@ -1,5 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="end center" class="shadow-bottom p-2">
-  <button mat-raised-button color="primary" (click)="openSearchListDialog()">Add Product</button>
+  <button mat-raised-button color="primary" (click)="openAddProductDialog()">Add Product</button>
   <!--<mat-form-field class="example-form-field">
     <input matInput type="text" placeholder="Search">
     <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="true">
@@ -9,5 +9,36 @@
       <mat-icon class="btn-suffix-icon" color="primary">search</mat-icon>
     </button>
   </mat-form-field>-->
+</div>
+<div class="p-3">
+  <mat-card *ngFor="let product of products" class="mb-3">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <img *ngIf="product.url.includes('www.amazon')" src="assets/images/amazon-24.png"  alt="amazon"/>
+      <img *ngIf="product.url.includes('www.flipkart')" src="assets/images/flipkart_26.png"  alt="flipkart"/>
+      <a [href]="product.url" target="_blank" class="text-dot text-bold h5 pl-3" fxFlex>{{product.title}}</a>
+      <button mat-icon-button aria-label="Notification" color="primary">
+        <mat-icon>{{product?.needNotification ? 'notifications' : 'notifications_off'}}</mat-icon>
+<!--        <mat-icon>notifications_off</mat-icon>-->
+      </button>
+      <button mat-icon-button aria-label="Delete" color="warn" (click)="deleteProduct(product.pid)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="mt-3" fxLayout.xs="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between center">
+      <label><span class="text-bold">Initial Price:</span> {{product?.currency}} {{product?.initialPrice}}</label>
+      <label>
+        <span class="text-bold">Best Price:</span> {{product?.currency}} {{product?.bestPrice?.price}} ({{product?.bestPrice?.date | date}})
+      </label>
+      <label><span class="text-bold">Current Price:</span> {{product?.currency}} {{product?.currentPrice}}</label>
+      <label class="text-strong"
+             [ngClass]="((product?.currentPrice / product?.initialPrice) - 1) < 0 ? 'text-green' : 'text-red'">
+        {{(product?.currentPrice / product?.initialPrice) - 1 | percent }}
+      </label>
+    </div>
+    <div class="mt-3" fxLayout.xs="column" fxLayout.gt-xs="row">
+
+    </div>
+  </mat-card>
 </div>
 

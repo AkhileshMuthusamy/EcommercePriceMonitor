@@ -87,12 +87,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-top: ($spacer * .5) !important;
 }
 
+.mt-3 {
+  margin-top: $spacer !important;
+}
+
 .mb-3 {
   margin-bottom: $spacer !important;
 }
 
 .ml-1 {
   margin-left: ($spacer * .25) !important;
+}
+
+.my-3 {
+  margin-top: $spacer !important;
+  margin-bottom: $spacer !important;
 }
 
 .p-0 {
@@ -173,4 +182,42 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .text-uppercase {
   text-transform: uppercase !important;
+}
+
+.text-bold {
+  font-weight: 500 !important;
+}
+
+.text-strong {
+  font-weight: bolder !important;
+}
+.text-red {
+  color: indianred !important;
+}
+
+.text-green {
+  color: mediumseagreen !important;
+}
+
+.h5 {
+  font-size: medium !important;
+}
+
+label {
+  font-size: medium;
+}
+
+.text-dot {
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
+a {
+  text-decoration: none !important;
+  color: black;
+  &:hover {
+    cursor: pointer;
+    color: #054b99;
+  }
 }

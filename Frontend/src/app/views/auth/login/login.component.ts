@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
           this.authService.isLoginSubject.next(true);
           this.router.navigate(['/dashboard']);
         } else {
-          this.snackBar.open(res.message || 'Unable to login', 'close');
+          this.snackBar.open(res.message || 'Unable to login', 'Close', {duration: 2000});
         }
       });
     }

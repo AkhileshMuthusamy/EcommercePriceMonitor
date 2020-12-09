@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {APIResponse} from '../shared/Objects/api-response';
 import {environment} from '../../environments/environment';
@@ -21,5 +21,13 @@ export class ProductService {
       url
     };
     return this.http.post<any>(`${this.apiURL}product`, data);
+  }
+
+  getUserProductAPI(): Observable<APIResponse<any>> {
+    return this.http.get<APIResponse<any>>(`${this.apiURL}product?uid=${this.authService.getUid()}`);
+  }
+
+  deleteUserProduct(pid: string): Observable<APIResponse<any>> {
+    return this.http.delete<any>(`${this.apiURL}product?pid=${pid}`);
   }
 }
