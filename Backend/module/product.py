@@ -36,7 +36,8 @@ class Product(Resource):
                         'title': product[1],
                         'needNotification': True,
                         'hasNotifiedToday': False,
-                        'notifyOnPercent': 10
+                        'notifyOnPercent': 3,
+                        'fetchError': False
                     })
                     return jsonify({'message': 'Product added successfully!', 'error': False, 'data': None})
                 else:
@@ -56,7 +57,7 @@ class Product(Resource):
                 docs = doc_ref.stream()
                 data = []
                 for doc in docs:
-                    data.append(product_response(doc))
+                    data.append(utils.product_response(doc))
                 return jsonify({'message': 'Product fetched successfully!', 'error': False, 'data': data})
             else:
                 return jsonify({'message': 'Unable to retrieve product info', 'error': True, 'data': None})
@@ -89,8 +90,3 @@ class Product(Resource):
             return jsonify({'message': 'Error while update product', 'error': True, 'data': str(e)})
 
 
-def product_response(doc):
-    product_data = doc.to_dict()
-    product_data['pid'] = doc.id
-
-    return product_data

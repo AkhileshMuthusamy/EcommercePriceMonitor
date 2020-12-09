@@ -5,7 +5,10 @@ from flask_cors import CORS
 import firebase_admin
 from firebase_admin import credentials, firestore
 import os
-import module.schedule_job as job
+from dotenv import load_dotenv
+from pathlib import Path
+env_path = Path('.') / 'config/.env'
+load_dotenv(dotenv_path=env_path)
 
 if os.environ.get('IS_HEROKU'):
     print(os.environ.get('FIREBASE_KEY'))
@@ -15,7 +18,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 # It's necessary to import below class after initializing firebase
-
+import module.schedule_job as job
 from module.product import Product
 from module.user import UserLogin, RegisterUser
 

@@ -1,14 +1,5 @@
 <div fxLayout="row" fxLayoutAlign="end center" class="shadow-bottom p-2">
   <button mat-raised-button color="primary" (click)="openAddProductDialog()">Add Product</button>
-  <!--<mat-form-field class="example-form-field">
-    <input matInput type="text" placeholder="Search">
-    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="true">
-      <mat-icon>close</mat-icon>
-    </button>
-    <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="openSearchListDialog()">
-      <mat-icon class="btn-suffix-icon" color="primary">search</mat-icon>
-    </button>
-  </mat-form-field>-->
 </div>
 <div class="p-3">
   <mat-card *ngFor="let product of products" class="mb-3">
@@ -26,15 +17,22 @@
     </div>
     <mat-divider></mat-divider>
     <div class="mt-3" fxLayout.xs="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between center">
-      <label><span class="text-bold">Initial Price:</span> {{product?.currency}} {{product?.initialPrice}}</label>
+      <label><span class="text-bold">Initial Price:</span> {{product?.currency}} {{product?.initialPrice | number}}</label>
       <label>
-        <span class="text-bold">Best Price:</span> {{product?.currency}} {{product?.bestPrice?.price}} ({{product?.bestPrice?.date | date}})
+        <span class="text-bold">Best Price:</span>
+        {{product?.currency}} {{product?.bestPrice?.price | number}} ({{product?.bestPrice?.date | date}})
       </label>
-      <label><span class="text-bold">Current Price:</span> {{product?.currency}} {{product?.currentPrice}}</label>
-      <label class="text-strong"
-             [ngClass]="((product?.currentPrice / product?.initialPrice) - 1) < 0 ? 'text-green' : 'text-red'">
-        {{(product?.currentPrice / product?.initialPrice) - 1 | percent }}
-      </label>
+      <label><span class="text-bold">Current Price:</span> {{product?.currency}} {{product?.currentPrice | number}}</label>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <mat-icon class="text-red" *ngIf="((product?.currentPrice / product?.initialPrice) - 1) > 0">north</mat-icon>
+        <mat-icon class="text-green" *ngIf="((product?.currentPrice / product?.initialPrice) - 1) < 0">south</mat-icon>
+        <label class="text-strong text-red" *ngIf="((product?.currentPrice / product?.initialPrice) - 1) >= 0">
+          {{(product?.currentPrice / product?.initialPrice) - 1 | percent }}
+        </label>
+        <label class="text-strong text-green" *ngIf="((product?.currentPrice / product?.initialPrice) - 1) < 0">
+          {{1 - (product?.currentPrice / product?.initialPrice) | percent }}
+        </label>
+      </div>
     </div>
   </mat-card>
 </div>

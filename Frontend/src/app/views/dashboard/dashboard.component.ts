@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {AddProductComponent} from './add-product/add-product.component';
-import {AuthService} from '../../shared/services/auth.service';
 import {ProductService} from '../../services/product.service';
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'mci-dashboard',

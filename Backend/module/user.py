@@ -24,7 +24,7 @@ class RegisterUser(Resource):
 
                 # If user doesn't exist create one
                 if not user_data:
-                    doc_ref = db.collection(u'users')
+                    doc_ref = db.collection('users')
                     doc_ref.document().set({
                         'email': args['email'],
                         'password': args['password'],
@@ -56,16 +56,6 @@ class UserLogin(Resource):
             return jsonify({'message': '', 'error': False, 'data': user_data})
         else:
             return jsonify({'message': 'Email or password is invalid', 'error': True, 'data': None})
-        # Retrieve all docs from firebase
-        # doc_ref = db.collection('users').stream()
-        # for doc in doc_ref:
-        #     print(doc.to_dict())
-        # try:
-        #     doc_ref = db.collection('users').document(u'fPmMfgBmBP3OFl5XzrL')
-        #     doc = doc_ref.get()
-        #     print(doc.to_dict())
-        # except google.cloud.exceptions.NotFound:
-        #     print(u'No such document!')
 
 
 def user_response(doc):

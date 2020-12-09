@@ -1,7 +1,9 @@
+import smtplib
 from bs4 import BeautifulSoup
 import urllib
 import urllib.request
 import re
+import os
 
 
 def scrap_product(url):
@@ -50,3 +52,36 @@ def scrap_product(url):
     price = float(price_str)
 
     return price, title, currency
+
+
+def product_response(doc):
+    product_data = doc.to_dict()
+    product_data['pid'] = doc.id
+
+    return product_data
+
+
+def send_email_notification(email, product_title, price):
+    print(email, product_title, price)
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+    server.ehlo()
+
+    server.login(os.environ.get('EMAIL_ID'), os.environ.get('EMAIL_PASSWORD'))
+
+    subject = 'Price Fell Down <DO NOT REPLY>'
+    body = f"The Price for the Product: {product_title} has now decreased to Rs. {price}."
+
+    msg = f"Subject: {subject}\n\n{body}"
+
+    print(msg)
+    server.sendmail(
+        os.environ.get('EMAIL_ID'),
+        email,
+        msg.encode('utf-8')
+    )
+
+    # quit the server
+    server.quit()
+
