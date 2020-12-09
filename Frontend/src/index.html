@@ -8,8 +8,61 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style type="text/css">
+    html, body {
+      height: 100%;
+    }
+    body { margin: 0; }
+    .container {
+      display: flex;
+      min-width: 100%;
+      height: 100%;
+      background: rgba(221, 218, 218, 0.4);
+      z-index: 10;
+      align-items: center;
+      justify-content: center;
+    }
+    @keyframes ldio-6f9vl7fscvi {
+      0% { background: #8bc541 }
+      12.5% { background: #8bc541 }
+      12.625% { background: #127ec2 }
+      100% { background: #127ec2 }
+    }
+    .ldio-6f9vl7fscvi div {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: #127ec2;
+      animation: ldio-6f9vl7fscvi 1s linear infinite;
+    }
+    .loadingio-spinner-blocks-rw6u1rikbyb {
+      width: 200px;
+      height: 200px;
+      display: inline-block;
+      overflow: hidden;
+      background: none;
+    }
+    .ldio-6f9vl7fscvi {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform: translateZ(0) scale(1);
+      backface-visibility: hidden;
+      transform-origin: 0 0; /* see note above */
+    }
+    .ldio-6f9vl7fscvi div { box-sizing: content-box; }
+
+  </style>
 </head>
 <body class="mat-typography">
-  <app-root></app-root>
+  <app-root>
+    <div class="container">
+      <div class="loadingio-spinner-blocks-rw6u1rikbyb">
+        <div class="ldio-6f9vl7fscvi">
+          <div style='left:38px;top:38px;animation-delay:0s'></div><div style='left:80px;top:38px;animation-delay:0.125s'></div><div style='left:122px;top:38px;animation-delay:0.25s'></div><div style='left:38px;top:80px;animation-delay:0.875s'></div><div style='left:122px;top:80px;animation-delay:0.375s'></div><div style='left:38px;top:122px;animation-delay:0.75s'></div><div style='left:80px;top:122px;animation-delay:0.625s'></div><div style='left:122px;top:122px;animation-delay:0.5s'></div>
+        </div>
+      </div>
+    </div>
+  </app-root>
 </body>
 </html>
