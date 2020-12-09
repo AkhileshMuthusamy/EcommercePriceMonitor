@@ -1,0 +1,63 @@
+<div class="h-100">
+  <div [ngStyle]="{height: '64px'}" [ngStyle.lt-sm]="{height: '56px'}">
+    <mat-toolbar color="primary">
+      <!-- Mobile Header -->
+      <mat-toolbar-row fxHide.gt-xs>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
+          <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <span fxLayout="row" fxLayoutAlign="space-between center">
+            <img class="header-logo" src="assets/images/logo-white.png" />
+          </span>
+          <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar-row>
+      <!-- Desktop Header -->
+      <mat-toolbar-row fxHide.lt-sm>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100">
+          <div fxLayout="row" fxLayoutAlign="space-between center" fxFlex="100px">
+            <button mat-icon-button (click)="showMenuLabel = !showMenuLabel">
+              <mat-icon>menu</mat-icon>
+            </button>
+            <span fxLayout="row" fxLayoutAlign="space-between center">
+              <img class="header-logo" src="assets/images/logo-white.png" />
+            </span>
+          </div>
+          <button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar-row>
+      <mat-menu #beforeMenu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="authService.logout()">
+          <mat-icon>meeting_room</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </mat-toolbar>
+  </div>
+  <div ngClass="full-height-lt-sm" ngClass.gt-xs="full-height-gt-xs">
+    <mat-sidenav-container class="h-100 pt-0" autosize>
+      <mat-sidenav #sidenav [mode]="sideMenuMode" class="dark-bg" [opened]="sideMenuOpened" (closed)="true">
+        <mat-selection-list [multiple]="false">
+          <mat-list-option selected class="text-white">
+            <mat-icon mat-list-icon>donut_large</mat-icon>
+            <span *ngIf="showMenuLabel">
+              Dashboard
+            </span>
+          </mat-list-option>
+          <mat-divider></mat-divider>
+        </mat-selection-list>
+      </mat-sidenav>
+
+      <mat-sidenav-content>
+
+        <router-outlet></router-outlet>
+
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>
+</div>
