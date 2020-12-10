@@ -1,0 +1,16 @@
+::ng-deep .mat-list-base {
+  padding-top: 0 !important;
+}
+
+.full-height-gt-xs {
+  height: calc(100% - 64px);
+}
+
+.full-height-lt-sm {
+  height: calc(100% - 56px);
+}
+
+.dark-bg {
+  background-color: #3e4244;
+  color: white;
+}
