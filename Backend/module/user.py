@@ -27,8 +27,7 @@ class RegisterUser(Resource):
                     doc_ref = db.collection('users')
                     doc_ref.document().set({
                         'email': args['email'],
-                        'password': args['password'],
-                        'products': []
+                        'password': args['password']
                     })
                     return jsonify({'message': 'User created successfully!', 'error': False, 'data': None})
                 else:

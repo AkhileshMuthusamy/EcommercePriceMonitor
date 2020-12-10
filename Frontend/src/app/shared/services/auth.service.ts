@@ -29,6 +29,10 @@ export class AuthService {
     return this.http.post<any>(`${this.apiURL}login`, data);
   }
 
+  register(data: User): Observable<APIResponse<any>> {
+    return this.http.post<any>(`${this.apiURL}register`, data);
+  }
+
   storeToken(uid) {
     sessionStorage.setItem(this.USER_TOKEN, uid);
   }

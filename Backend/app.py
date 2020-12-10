@@ -30,12 +30,11 @@ scheduler.init_app(app)
 scheduler.start()
 
 
-scheduler.add_job(id='notification_job', func=job.product_price_notification, trigger='interval', seconds=60)
+scheduler.add_job(id='notification_job', func=job.product_price_notification, trigger='interval', seconds=300)
 
 api.add_resource(UserLogin, '/login')
 api.add_resource(RegisterUser, '/register')
 api.add_resource(Product, '/product')
-#api.add_resource(FetchProduct, '/fetch_product')
 
 if __name__ == '__main__':
     app.run()
