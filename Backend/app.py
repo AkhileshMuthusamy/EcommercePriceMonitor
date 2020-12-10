@@ -10,9 +10,6 @@ from pathlib import Path
 env_path = Path('.') / 'config/.env'
 load_dotenv(dotenv_path=env_path)
 
-if os.environ.get('IS_HEROKU'):
-    print(os.environ.get('FIREBASE_KEY'))
-
 cred = credentials.Certificate("config/firebase_pvt_key.json")
 firebase_admin.initialize_app(cred)
 db = firestore.client()
