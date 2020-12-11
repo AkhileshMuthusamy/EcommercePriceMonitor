@@ -9,6 +9,7 @@ import os
 def scrap_product(url):
 
     price_tag = None
+    title_tag = None
     website = None
 
     if len(url) < 5:
@@ -40,13 +41,16 @@ def scrap_product(url):
         if price_tag.__len__() == 0:
             price_tag = soup.find_all(id="displayedPrice")
         title_tag = soup.find_all(id='productTitle')
-        title = title_tag[0].get_text()
     elif website == 'FLIPKART':
         price_tag = soup.find_all("div", {"class": "_30jeq3 _16Jk6d"})
         title_tag = soup.find_all("span", {"class": "B_NuCI"})
-        title = title_tag[0].get_text()
+
+    if len(price_tag) == 0:
+        return None
 
     price_text = price_tag[0].get_text()
+    if len(title_tag) > 0:
+        title = title_tag[0].get_text()
     currency = re.sub('([^₹$])+', '', price_text)
     price_str = re.sub('([^0-9.])+', '', price_text)
     price = float(price_str)

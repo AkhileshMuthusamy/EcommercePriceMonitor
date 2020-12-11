@@ -14,5 +14,8 @@
 <mat-divider></mat-divider>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button color="primary" [disabled]="!url" (click)="addProduct()">Add</button>
+  <button mat-raised-button color="primary" [disabled]="!url || isLoading" (click)="addProduct()">
+    <mat-icon *ngIf="isLoading"><mat-spinner diameter="20"></mat-spinner></mat-icon>
+    Add
+  </button>
 </mat-dialog-actions>

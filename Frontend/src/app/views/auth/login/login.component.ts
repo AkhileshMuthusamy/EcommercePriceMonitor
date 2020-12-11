@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   hide = true;
-  isSuccess = false;
+  isLoading = false;
   isMessage: string;
 
   constructor(
@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.submitted = true;
     if (this.loginForm.valid) {
+      this.isLoading = true;
       this.authService.login(this.loginForm.getRawValue()).subscribe(res => {
         if (!res.error) {
           this.submitted = false;
@@ -58,6 +59,10 @@ export class LoginComponent implements OnInit {
         } else {
           this.snackBar.open(res.message || 'Unable to login', 'Close', {duration: 2000});
         }
+        this.isLoading = false;
+      }, () => {
+        this.isLoading = false;
+        this.snackBar.open( 'Error while connecting. Please try again.', 'Close', {duration: 2000});
       });
     }
   }
