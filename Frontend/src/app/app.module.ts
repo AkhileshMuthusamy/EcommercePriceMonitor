@@ -17,6 +17,7 @@ import { CoreModule } from './core/core.module';
 import { LoginComponent } from './views/auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './views/auth/register/register.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { RegisterComponent } from './views/auth/register/register.component';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

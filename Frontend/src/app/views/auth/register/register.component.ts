@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
   submitted = false;
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -46,6 +47,7 @@ export class RegisterComponent implements OnInit {
   submit() {
     this.submitted = true;
     if (this.registerForm.valid) {
+      this.isLoading = true;
       this.authService.register(this.registerForm.getRawValue()).subscribe(res => {
         if (!res.error) {
           this.submitted = false;
@@ -54,6 +56,10 @@ export class RegisterComponent implements OnInit {
         } else {
           this.snackBar.open(res.message || 'Unable to create user', 'Close', {duration: 2000});
         }
+        this.isLoading = false;
+      }, () => {
+        this.isLoading = false;
+        this.snackBar.open( 'Error while connecting. Please try again.', 'Close', {duration: 2000});
       });
     }
   }
