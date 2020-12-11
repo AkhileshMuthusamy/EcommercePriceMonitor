@@ -21,33 +21,35 @@ import { DashboardComponent } from './dashboard.component';
 import { SearchListComponent } from './search-list/search-list.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import {FormsModule} from "@angular/forms";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 
 @NgModule({
   declarations: [DashboardComponent, SearchListComponent, AddProductComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: DashboardComponent,
-      },
-    ]),
-    FlexLayoutModule,
-    MatIconModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatDialogModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatCardModule,
-    MatDividerModule,
-    FormsModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild([
+            {
+                path: '',
+                component: DashboardComponent,
+            },
+        ]),
+        FlexLayoutModule,
+        MatIconModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatTabsModule,
+        MatTableModule,
+        MatCheckboxModule,
+        MatDialogModule,
+        MatSortModule,
+        MatPaginatorModule,
+        MatCardModule,
+        MatDividerModule,
+        FormsModule,
+        MatProgressSpinnerModule
+    ],
 })
 export class DashboardModule {}

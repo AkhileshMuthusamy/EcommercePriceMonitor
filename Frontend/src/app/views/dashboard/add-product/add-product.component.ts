@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ProductService} from '../../../services/product.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {MatDialogRef} from "@angular/material/dialog";
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-product',
@@ -11,6 +11,7 @@ import {MatDialogRef} from "@angular/material/dialog";
 export class AddProductComponent implements OnInit {
 
   url = '';
+  isLoading = false;
 
   constructor(
     private productService: ProductService,
@@ -22,6 +23,7 @@ export class AddProductComponent implements OnInit {
   }
 
   addProduct() {
+    this.isLoading = true;
     this.productService.addProductAPI(this.url).subscribe(response => {
       if (!response.error) {
         this.snackBar.open(response.message, 'close', {duration: 2000});
@@ -29,6 +31,10 @@ export class AddProductComponent implements OnInit {
       } else {
         this.snackBar.open(response.message, 'close', {duration: 2000});
       }
+      this.isLoading = false;
+    }, () => {
+        this.isLoading = false;
+        this.snackBar.open( 'Error while connecting. Please try again.', 'Close', {duration: 2000});
     });
   }
 }
